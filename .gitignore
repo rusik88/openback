@@ -1,0 +1,6 @@
+.idea
+/config.php
+/admin/config.php
+/storage/*
+/storage/storage/* 
+/image/*
