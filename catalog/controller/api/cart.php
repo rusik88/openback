@@ -132,7 +132,7 @@ class ControllerApiCart extends Controller {
 		if (!isset($this->session->data['api_id'])) {
 			$json['error']['warning'] = $this->language->get('error_permission');
 		} else {
-			// Stock
+			// Stock 
 			if (!$this->cart->hasStock() && (!$this->config->get('config_stock_checkout') || $this->config->get('config_stock_warning'))) {
 				$json['error']['stock'] = $this->language->get('error_stock');
 			}
