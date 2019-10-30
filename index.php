@@ -17,7 +17,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 
 }
 
-//echo json_encode(array("test" => "test_df111"));
+
+//echo json_encode(array("post" => $_POST['username'], 'get' => $_GET['route'])); 
 
 //exit();
 
