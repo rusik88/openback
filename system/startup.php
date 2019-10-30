@@ -2,6 +2,23 @@
 // Error Reporting
 error_reporting(E_ALL);
 
+if(strripos($_SERVER['REQUEST_URI'], 'route=api/') !== false) {
+	if (isset($_SERVER['HTTP_ORIGIN'])) {
+		header("Access-Control-Allow-Origin: {$_SERVER['HTTP_ORIGIN']}");
+		header('Access-Control-Allow-Credentials: true');
+		header('Access-Control-Max-Age: 86400');
+	}
+	
+	if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
+		if (isset($_SERVER['HTTP_ACCESS_CONTROL_REQUEST_METHOD']))
+			header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
+	
+		if (isset($_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']))
+			header("Access-Control-Allow-Headers: {$_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']}");
+	
+	}
+}
+
 // Check Version
 if (version_compare(phpversion(), '5.4.0', '<') == true) {
 	exit('PHP5.4+ Required');
