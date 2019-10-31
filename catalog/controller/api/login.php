@@ -10,7 +10,7 @@ class ControllerApiLogin extends Controller {
 		// Login with API Key
 		$api_info = $this->model_account_api->login($this->request->post['username'], $this->request->post['key']);
 
-		if ($api_info) {
+		if ($api_info['username'] && $api_info['key']) {
 			// Check if IP is allowed
 			$ip_data = array();
 	
@@ -39,6 +39,9 @@ class ControllerApiLogin extends Controller {
 			} else {
 				$json['error']['key'] = $this->language->get('error_key');
 			}
+		} else {
+			$json['error']['key'] = 'Отсутствует логин или пароль';
+			$this->response->addHeader('HTTP/1.1 403 Forbidden');
 		}
 		
 		$this->response->addHeader('Content-Type: application/json');
