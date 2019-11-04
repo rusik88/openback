@@ -10,6 +10,7 @@
 /**
 * Response class
 */
+
 class Response {
 	private $headers = array();
 	private $level = 0;
@@ -117,5 +118,21 @@ class Response {
 			
 			echo $output;
 		}
+	}
+
+	public function code($code = 200, $codeText) {
+		http_response_code($code);
+		return $this->errorTextCode($codeText);
+	}
+
+	private function errorTextCode($codeText) {
+		$errorCodeText = array(
+			1 => "Username or key are not specified",
+			2 => "The username or key is not correct"
+		);
+
+		if(isset($errorCodeText[$codeText])) return array('eror_code' => $codeText, 'error_message' => $errorCodeText[$codeText]);
+
+		return array('eror_code' => $codeText, 'error_message' => '');
 	}
 }
