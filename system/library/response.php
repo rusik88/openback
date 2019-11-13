@@ -121,8 +121,10 @@ class Response {
 	}
 
 	public function code($code = 200, $codeText) {
-		http_response_code($code);
-		return $this->errorTextCode($codeText);
+		return array(
+			"http_code" => $code,
+			"http_message" => $this->errorTextCode($codeText)
+		);
 	}
 
 	private function errorTextCode($codeText) {
@@ -131,8 +133,8 @@ class Response {
 			2 => "The username or key is not correct"
 		);
 
-		if(isset($errorCodeText[$codeText])) return array('eror_code' => $codeText, 'error_message' => $errorCodeText[$codeText]);
+		if(isset($errorCodeText[$codeText])) return array('code' => $codeText, 'message' => $errorCodeText[$codeText]);
 
-		return array('eror_code' => $codeText, 'error_message' => '');
+		return array('code' => $codeText, 'message' => '');
 	}
 }

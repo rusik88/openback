@@ -42,11 +42,11 @@ class ControllerApiLogin extends Controller {
 				}
 			}
 			else {
-				$json["error"] = $this->response->code(401, 2);
+				$json["http"] = $this->response->code(403, 2);
 			}
 		}
 		else {
-			$json["error"] = $this->response->code(403, 1);
+			$json["http"] = $this->response->code(403, 1);
 		}
 		
 		$this->response->addHeader('Content-Type: application/json');
